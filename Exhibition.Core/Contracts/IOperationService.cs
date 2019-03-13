@@ -1,5 +1,6 @@
 ﻿
 
+using Exhibition.Core.CrosEnabledService;
 using Exhibition.Core.Models;
 using System.ServiceModel;
 using System.ServiceModel.Web;

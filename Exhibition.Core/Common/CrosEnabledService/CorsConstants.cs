@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exhibition.Core
+namespace Exhibition.Core.CrosEnabledService
 {
     public class CorsConstants
     {
@@ -14,6 +14,7 @@ namespace Exhibition.Core
         internal const string AccessControlRequestHeaders = "Access-Control-Request-Headers";
         internal const string AccessControlAllowMethods = "Access-Control-Allow-Methods";
         internal const string AccessControlAllowHeaders = "Access-Control-Allow-Headers";
+
         internal const string PreflightSuffix = "_preflight_";
     }
 }

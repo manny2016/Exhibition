@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
+﻿
 
-namespace Exhibition.Core
+namespace Exhibition.Core.CrosEnabledService
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     public class EnableCorsEndpointBehavior : IEndpointBehavior
     {
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
@@ -22,8 +19,8 @@ namespace Exhibition.Core
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
         {
-            var corsEnabledOperations = endpoint.Contract.Operations
-                .SelectMany(o => o.OperationBehaviors.Select(f => f as OperationDescription))
+            List<OperationDescription> corsEnabledOperations = endpoint.Contract.Operations
+                .Where(o => o.Behaviors.Find<CorsEnabledAttribute>() != null)
                 .ToList();
             endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new CorsEnabledMessageInspector(corsEnabledOperations));
         }
