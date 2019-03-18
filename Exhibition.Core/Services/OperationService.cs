@@ -9,7 +9,7 @@ using Exhibition.Core.Models;
 
 namespace Exhibition.Core.Services
 {
-    
+
 
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class OperationService : IOperationService
@@ -23,12 +23,12 @@ namespace Exhibition.Core.Services
 
         public void Play(Resource resource)
         {
-            
+            Host.TriggerOperationEvent(this, OperationTypes.Play, resource);
         }
 
         public void Stop()
         {
-
+            Host.TriggerOperationEvent(this, OperationTypes.Stop, null);
         }
     }
 }

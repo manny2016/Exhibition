@@ -19,7 +19,9 @@ namespace Exhibition.Core.Configuration
 
         static readonly string[] EXTENSION_VIDEO_RESOURCE = new string[] { ".avi", ".mp4", ".mpeg" };
         static readonly string[] EXTENSION_POWERPOINT_RESOURCE = new string[] { ".ppt", ".pptx" };
-        static readonly string[] EXTENSION_WORD_RESOURCE = new string[] { ".word", ".word" };
+        static readonly string[] EXTENSION_WORD_RESOURCE = new string[] { ".doc", ".docx" };
+        static readonly string[] EXTENSION_IMAGE_RESOURCE = new string[] { ".jpg", ".jpeg", ".png", "bmp" };
+        static readonly string[] EXTENSION_WEBPAGE_PAGE_RESOURCE = new string[] { ".link" };
 
         public static Settings GetSettings()
         {
@@ -100,7 +102,8 @@ namespace Exhibition.Core.Configuration
             {
                 navigation.Children = directories.Select(o =>
                 {
-
+                    var images = new List<Resource>();
+                    var h5 = new List<Resource>();
                     var sub = new Navigation() { Name = o.Replace(root, string.Empty).TrimStart('\\'), DisplayName = o.Replace(root, string.Empty).TrimStart('\\') };
                     sub.ResLocation = o;
                     var nonImageCollection = Directory.GetFiles(sub.ResLocation).Select(file =>
@@ -112,17 +115,17 @@ namespace Exhibition.Core.Configuration
                             Name = fileInfo.Name,
                             Type = PredicateResourceType(fileInfo)
                         };
-                    }).ToArray();//获取视频 PPT，文件集合
-                    var images = Directory.GetDirectories(sub.ResLocation).Select(directory =>
+                    }).Where(resource => resource.Type != ResourceType.NotSupport).ToArray();//获取视频 PPT，文件集合
+                    if (IsSpecificFolder(new DirectoryInfo(o), EXTENSION_IMAGE_RESOURCE))
                     {
-                        var resource = new Resource()
+                        images.Add(new Resource()
                         {
-                            FullName = directory,
-                            Name = directory.Replace(sub.ResLocation, string.Empty).TrimStart('\\'),
-                            Type = ResourceType.ImageFolder
-                        };
-                        return resource;
-                    }).ToArray();
+                            Name = new DirectoryInfo(o).Name,
+                            Type = ResourceType.ImageFolder,
+                            FullName = sub.ResLocation
+                        });
+                    }
+
                     var list = new List<Resource>();
                     list.AddRange(nonImageCollection);
                     list.AddRange(images);
@@ -142,7 +145,25 @@ namespace Exhibition.Core.Configuration
                 return ResourceType.PowerPoint;
             if (EXTENSION_WORD_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.Word;
+            if (EXTENSION_WEBPAGE_PAGE_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+                return ResourceType.WebPage;
             return ResourceType.NotSupport;
+        }
+
+      
+        public static bool IsSpecificFolder(DirectoryInfo directory, string[] extensions)
+        {
+            if (IsEmplyFolder(directory)) return false;
+            return directory.GetFiles().All(info =>
+            {
+                return extensions.Any(o => o.Equals(info.Extension));
+            });
+
+        }
+        private static bool IsEmplyFolder(DirectoryInfo directory)
+        {
+            if (directory.GetFiles() == null || directory.GetFiles().Count().Equals(0)) return true;
+            return false;
         }
 
         private static ServiceHost host = null;
@@ -150,7 +171,7 @@ namespace Exhibition.Core.Configuration
         public static void HostOperationSerivceViaConfiguration()
         {
 
-            var host = new CorsEnabledServiceHost(typeof(OperationService));           
+            var host = new CorsEnabledServiceHost(typeof(OperationService));
             host.Opened += delegate
             {
                 Console.WriteLine("Operation Service has begun to listen ... ...");

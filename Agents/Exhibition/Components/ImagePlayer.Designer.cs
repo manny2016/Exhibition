@@ -28,10 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.picbox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // picbox
+            // 
+            this.picbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picbox.Location = new System.Drawing.Point(0, 0);
+            this.picbox.Name = "picbox";
+            this.picbox.Size = new System.Drawing.Size(1031, 698);
+            this.picbox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picbox.TabIndex = 0;
+            this.picbox.TabStop = false;
+            // 
+            // ImagePlayer
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.picbox);
+            this.Name = "ImagePlayer";
+            this.Size = new System.Drawing.Size(1031, 698);
+            ((System.ComponentModel.ISupportInitialize)(this.picbox)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox picbox;
     }
 }

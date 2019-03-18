@@ -12,17 +12,23 @@ using Exhibition.Core.Configuration;
 
 namespace Exhibition
 {
-    public partial class FrmConsole : Form
+    public partial class FrmContainer : Form
     {
-        public FrmConsole()
+        public FrmContainer()
         {
             InitializeComponent();
+            this.Load += FrmContainer_Load;
+            Host.Operate += Host_Operate;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Host_Operate(object sender, Core.Models.OperatorEventArgs e)
         {
-            var settings =ExhibitionConfiguration.GetSettings();
-            var navs = ExhibitionConfiguration.GenernateNavigations().ToArray();
+
+        }
+
+        private void FrmContainer_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Exhibition.Core
 {
-    public enum ResourceType
+    public enum OperationTypes
     {
-        NotSupport = -1,
-        PowerPoint = 1,
-        Video = 2,
-        ImageFolder = 3,
-        Word = 4,
-        WebPage = 6,
+        Play = 1,
+        Stop = 2,
     }
 }

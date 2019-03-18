@@ -84,11 +84,14 @@
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\ExhibitionConfiguration.cs" />
     <Compile Include="Contracts\IOperationService.cs" />
+    <Compile Include="Enum\OperationTypes.cs" />
     <Compile Include="Enum\ResourceType.cs" />
+    <Compile Include="Models\EventArgs\OperatorEventArgs.cs" />
     <Compile Include="Models\Navigation.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OperationService.cs" />
+    <Compile Include="Utilities\Host.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Navigation.json" />

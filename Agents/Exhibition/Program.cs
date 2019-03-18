@@ -16,7 +16,7 @@ namespace Exhibition
             ExhibitionConfiguration.HostOperationSerivceViaConfiguration();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmConsole());
+            Application.Run(new FrmContainer());
         }
     }
 }
