@@ -60,12 +60,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Cros\CorsConstants.cs" />
-    <Compile Include="Common\Cros\CorsEnabledAttribute.cs" />
-    <Compile Include="Common\Cros\CorsEnabledMessageInspector.cs" />
-    <Compile Include="Common\Cros\EnableCorsEndpointBehavior.cs" />
-    <Compile Include="Common\Cros\PreflightOperationBehavior.cs" />
-    <Compile Include="Common\Cros\PreflightOperationInvoker.cs" />
+    <Compile Include="Common\CrosEnabledService\CorsConstants.cs" />
+    <Compile Include="Common\CrosEnabledService\CorsEnabledAttribute.cs" />
+    <Compile Include="Common\CrosEnabledService\CorsEnabledMessageInspector.cs" />
+    <Compile Include="Common\CrosEnabledService\CorsEnabledServiceHost.cs" />
+    <Compile Include="Common\CrosEnabledService\CorsEnabledServiceHostFactory.cs" />
+    <Compile Include="Common\CrosEnabledService\EnableCorsEndpointBehavior.cs" />
+    <Compile Include="Common\CrosEnabledService\PreflightOperationBehavior.cs" />
+    <Compile Include="Common\CrosEnabledService\PreflightOperationInvoker.cs" />
     <Compile Include="Common\Extensions\JsonExension.cs" />
     <Compile Include="Common\GlobalHook\BaseHook.cs" />
     <Compile Include="Common\GlobalHook\KeyboardHook.CS" />

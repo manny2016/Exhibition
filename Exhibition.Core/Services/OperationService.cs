@@ -10,6 +10,7 @@ using Exhibition.Core.Models;
 namespace Exhibition.Core.Services
 {
     
+
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class OperationService : IOperationService
     {

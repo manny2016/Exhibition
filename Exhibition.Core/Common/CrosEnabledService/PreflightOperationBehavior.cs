@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
+﻿
 
-namespace Exhibition.Core
+namespace Exhibition.Core.CrosEnabledService
 {
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.Collections.Generic;
+
     public class PreflightOperationBehavior : IOperationBehavior
     {
         private OperationDescription preflightOperation;

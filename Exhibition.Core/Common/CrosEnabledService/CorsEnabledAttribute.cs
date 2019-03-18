@@ -7,7 +7,7 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exhibition.Core
+namespace Exhibition.Core.CrosEnabledService
 {
     public class CorsEnabledAttribute : Attribute, IOperationBehavior
     {

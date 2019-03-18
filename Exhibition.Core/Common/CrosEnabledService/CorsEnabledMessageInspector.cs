@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-
-namespace Exhibition.Core
+namespace Exhibition.Core.CrosEnabledService
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     public class CorsEnabledMessageInspector: IDispatchMessageInspector
     {
         private List<string> corsEnabledOperationNames;
@@ -20,7 +17,7 @@ namespace Exhibition.Core
             this.corsEnabledOperationNames = corsEnabledOperations.Select(o => o.Name).ToList();
         }
 
-        public object AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
+        public object AfterReceiveRequest(ref Message request, System.ServiceModel.IClientChannel channel, InstanceContext instanceContext)
         {
             HttpRequestMessageProperty httpProp = (HttpRequestMessageProperty)request.Properties[HttpRequestMessageProperty.Name];
             object operationName;

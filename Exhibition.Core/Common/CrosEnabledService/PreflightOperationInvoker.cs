@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-
-namespace Exhibition.Core
+﻿
+namespace Exhibition.Core.CrosEnabledService
 {
-    public class PreflightOperationInvoker: IOperationInvoker
+    using System;
+    using System.Net;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
+    using System.Collections.Generic;
+    public class PreflightOperationInvoker : IOperationInvoker
     {
         private string replyAction;
         List<string> allowedHttpMethods;

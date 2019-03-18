@@ -8,6 +8,9 @@ namespace Exhibition.Core.Configuration
     using System.Linq;
     using System.ServiceModel;
     using Exhibition.Core.Services;
+    using static Exhibition.Core.CrosEnabledService.CorsEnabledServiceHostFactory;
+    using Exhibition.Core.CrosEnabledService;
+    using System.ServiceModel.Description;
 
     public static class ExhibitionConfiguration
     {
@@ -146,22 +149,13 @@ namespace Exhibition.Core.Configuration
 
         public static void HostOperationSerivceViaConfiguration()
         {
-            host = new ServiceHost(typeof(OperationService));
+
+            var host = new CorsEnabledServiceHost(typeof(OperationService));           
             host.Opened += delegate
             {
                 Console.WriteLine("Operation Service has begun to listen ... ...");
             };
             host.Open();
-            //using (ServiceHost calculatorSerivceHost = new ServiceHost(typeof(OperationService)))
-            //{
-            //    calculatorSerivceHost.Opened += delegate
-            //    {
-            //        Console.WriteLine("Calculator Service has begun to listen ... ...");
-            //    };
-
-            //    calculatorSerivceHost.Open();
-            //    Console.Read();
-            //}
         }
 
 
