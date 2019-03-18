@@ -7,3 +7,8 @@
 /Agents/Console/obj
 /Agents/Exhibition/obj
 /Exhibition.Core/obj
+/Agents/Exhibition/bin/Debug
+/Agents/Console/bin/Debug
+/packages/Newtonsoft.Json.12.0.1
+/Exhibition.Core/bin/Debug
+/.vs
