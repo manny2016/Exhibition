@@ -17,11 +17,7 @@ namespace Exhibition.Core.Configuration
         const string PATH_SETTINGS = @"Configuration";
         const string FILENAME_SETTINGS = "settings.json";
 
-        static readonly string[] EXTENSION_VIDEO_RESOURCE = new string[] { ".avi", ".mp4", ".mpeg" };
-        static readonly string[] EXTENSION_POWERPOINT_RESOURCE = new string[] { ".ppt", ".pptx" };
-        static readonly string[] EXTENSION_WORD_RESOURCE = new string[] { ".doc", ".docx" };
-        static readonly string[] EXTENSION_IMAGE_RESOURCE = new string[] { ".jpg", ".jpeg", ".png", "bmp" };
-        static readonly string[] EXTENSION_WEBPAGE_PAGE_RESOURCE = new string[] { ".link" };
+
 
         public static Settings GetSettings()
         {
@@ -116,13 +112,15 @@ namespace Exhibition.Core.Configuration
                             Type = PredicateResourceType(fileInfo)
                         };
                     }).Where(resource => resource.Type != ResourceType.NotSupport).ToArray();//获取视频 PPT，文件集合
-                    if (IsSpecificFolder(new DirectoryInfo(o), EXTENSION_IMAGE_RESOURCE))
+                    if (IsSpecificFolder(new DirectoryInfo(o), Constants.EXTENSION_IMAGE_RESOURCE))
                     {
+                        var imagedir = new DirectoryInfo(o);
                         images.Add(new Resource()
                         {
-                            Name = new DirectoryInfo(o).Name,
+                            Name = imagedir.Name.Split('-')[1],
                             Type = ResourceType.ImageFolder,
-                            FullName = sub.ResLocation
+                            FullName = sub.ResLocation,
+                            ImageUrl = imagedir.GetFiles()[0].FullName
                         });
                     }
 
@@ -139,18 +137,18 @@ namespace Exhibition.Core.Configuration
 
         private static ResourceType PredicateResourceType(FileInfo info)
         {
-            if (EXTENSION_VIDEO_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_VIDEO_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.Video;
-            if (EXTENSION_POWERPOINT_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_POWERPOINT_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.PowerPoint;
-            if (EXTENSION_WORD_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_WORD_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.Word;
-            if (EXTENSION_WEBPAGE_PAGE_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_WEBPAGE_PAGE_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.WebPage;
             return ResourceType.NotSupport;
         }
 
-      
+
         public static bool IsSpecificFolder(DirectoryInfo directory, string[] extensions)
         {
             if (IsEmplyFolder(directory)) return false;

@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImagePlayer));
             this.picbox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picbox)).BeginInit();
             this.SuspendLayout();
             // 
             // picbox
             // 
-            this.picbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            
+            this.picbox.InitialImage = ((System.Drawing.Image)(resources.GetObject("picbox.InitialImage")));
             this.picbox.Location = new System.Drawing.Point(0, 0);
             this.picbox.Name = "picbox";
             this.picbox.Size = new System.Drawing.Size(1031, 698);

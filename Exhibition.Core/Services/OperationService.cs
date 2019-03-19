@@ -14,6 +14,10 @@ namespace Exhibition.Core.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class OperationService : IOperationService
     {
+        public void Dispose()
+        {
+            
+        }
 
         public Navigation[] GetNavigations()
         {

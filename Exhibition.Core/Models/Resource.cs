@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Exhibition.Core.Models
 {
-    
+
     public class Resource
     {
         [Newtonsoft.Json.JsonProperty("name")]
@@ -17,5 +17,8 @@ namespace Exhibition.Core.Models
 
         [Newtonsoft.Json.JsonProperty("fullName")]
         public string FullName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("imageUrl", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ImageUrl { get; set; }
     }
 }

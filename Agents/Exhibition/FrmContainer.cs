@@ -7,13 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Exhibition.Components;
 using Exhibition.Core;
 using Exhibition.Core.Configuration;
+using Exhibition.Core.Models;
 
 namespace Exhibition
 {
     public partial class FrmContainer : Form
     {
+        private UserControl player;
         public FrmContainer()
         {
             InitializeComponent();
@@ -21,14 +24,83 @@ namespace Exhibition
             Host.Operate += Host_Operate;
         }
 
-        private void Host_Operate(object sender, Core.Models.OperatorEventArgs e)
-        {
 
-        }
-
+        Settings settings = ExhibitionConfiguration.GetSettings();
         private void FrmContainer_Load(object sender, EventArgs e)
         {
+            if (Screen.AllScreens.Length > 1)
+            {
+                var screen = Screen.AllScreens[settings.DefaultMonitor - 1];
+                this.Location = new Point(screen.Bounds.X, screen.Bounds.Y);
+                this.Width = screen.Bounds.Width;
+                this.Height = screen.Bounds.Height;
+            }
+            this.DisposePlayer();
+            
+        }
+        private void Locating()
+        {
+            if (Screen.AllScreens.Length > 1)
+            {
+                var screen = Screen.AllScreens[settings.DefaultMonitor - 1];
+                this.Location = new Point(screen.Bounds.X, screen.Bounds.Y);
+                this.Width = screen.Bounds.Width;
+                this.Height = screen.Bounds.Height;
+            }
+        }
+        private void Host_Operate(object sender, OperatorEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new OperationEventHandler(this.InvokeOperate), sender, e);
+            }
+            else
+            {
+                this.InvokeOperate(sender, e);
+            }
 
         }
+        private void InvokeOperate(object sender, OperatorEventArgs e)
+        {
+
+            switch (e.Type)
+            {
+                case OperationTypes.Play:
+                    this.ReadytoPlay(e.Resource);
+                    ((IOperate)this.player).Play(e.Resource);
+                    break;
+                case OperationTypes.Stop:
+                    this.DisposePlayer();
+                    break;
+            }
+        }
+        private UserControl CreatePlayer(Resource resource)
+        {
+            switch (resource.Type)
+            {
+                case ResourceType.ImageFolder:
+                    return new ImagePlayer(resource);
+                default:
+                    break;
+
+            }
+            throw new NotSupportedException(resource.SerializeToJson());
+        }
+        private void ReadytoPlay(Resource resource)
+        {
+            this.SuspendLayout();
+            this.player = CreatePlayer(resource);            
+            this.Controls.Add(this.player);
+            this.ResumeLayout(false);
+        }
+        private void DisposePlayer()
+        {
+            if (player != null)
+            {
+                this.Controls.Remove(player);
+                player.Dispose();
+            }
+        }
+
     }
 }

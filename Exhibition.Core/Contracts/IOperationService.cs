@@ -1,15 +1,16 @@
 ﻿
 
-using Exhibition.Core.CrosEnabledService;
-using Exhibition.Core.Models;
-using System.ServiceModel;
-using System.ServiceModel.Web;
 
 namespace Exhibition.Core
 {
+
+    using Exhibition.Core.CrosEnabledService;
+    using Exhibition.Core.Models;
+    using System.ServiceModel;
+    using System.ServiceModel.Web;
     [ServiceContract]
     
-    public interface IOperationService
+    public interface IOperationService: IOperate
     {
 
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare,ResponseFormat = WebMessageFormat.Json,

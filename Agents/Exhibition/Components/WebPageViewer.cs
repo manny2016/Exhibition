@@ -12,9 +12,9 @@ using Exhibition.Core.Models;
 
 namespace Exhibition.Components
 {
-    public partial class VideoPlayer : UserControl, IOperationService
+    public partial class WebPageViewer : UserControl, IOperationService
     {
-        public VideoPlayer()
+        public WebPageViewer()
         {
             InitializeComponent();
         }

@@ -64,6 +64,12 @@
     <Compile Include="Components\VideoPlayer.Designer.cs">
       <DependentUpon>VideoPlayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\WebPageViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\WebPageViewer.Designer.cs">
+      <DependentUpon>WebPageViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmContainer.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -115,6 +121,9 @@
       <Project>{45b43c0f-bdf5-4d9b-b74a-ef9fa83c4b2e}</Project>
       <Name>Exhibition.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\九韵少年司法\少年司法新闻网\05 %282%29.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
