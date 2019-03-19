@@ -12,5 +12,8 @@ namespace Exhibition.Core.Configuration
         public Locator[] Locates { get; set; }
         [Newtonsoft.Json.JsonProperty("defaultMonitor")]
         public int DefaultMonitor { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("office")]
+        public string Office { get; set; }
     }
 }

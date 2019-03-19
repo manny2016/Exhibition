@@ -36,7 +36,7 @@ namespace Exhibition
                 this.Height = screen.Bounds.Height;
             }
             this.DisposePlayer();
-            
+
         }
         private void Locating()
         {
@@ -80,6 +80,8 @@ namespace Exhibition
             {
                 case ResourceType.ImageFolder:
                     return new ImagePlayer(resource);
+                case ResourceType.PowerPoint:
+                    return new PowerPointPlayer(resource);
                 default:
                     break;
 
@@ -88,8 +90,12 @@ namespace Exhibition
         }
         private void ReadytoPlay(Resource resource)
         {
+            if (this.player != null)
+            {
+                ((IOperate)this.player).Stop();
+            }
             this.SuspendLayout();
-            this.player = CreatePlayer(resource);            
+            this.player = CreatePlayer(resource);
             this.Controls.Add(this.player);
             this.ResumeLayout(false);
         }
@@ -97,8 +103,10 @@ namespace Exhibition
         {
             if (player != null)
             {
+                ((IOperate)this.player).Stop();
                 this.Controls.Remove(player);
-                player.Dispose();
+                this.player.Dispose();
+                this.player = null;
             }
         }
 

@@ -85,12 +85,14 @@ namespace Exhibition.Components
         }
         public void Stop()
         {
+            this.timer.Stop();
             base.Dispose();
+            
         }
 
         public void Play(Resource resource)
         {
-
+            this.timer.Start();
         }
         #region 切换动画
         /// <summary>
