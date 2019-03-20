@@ -81,7 +81,7 @@ namespace Exhibition
                 case ResourceType.ImageFolder:
                     return new ImagePlayer(resource);
                 case ResourceType.PowerPoint:
-                    return new PowerPointPlayer(resource);
+                    //return new PowerPointPlayer(resource);
                 default:
                     break;
 

@@ -13,6 +13,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +38,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChromiumFX, Version=3.3440.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\hxc.ChromiumFX.3.3440.1\lib\net40-client\ChromiumFX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -103,6 +109,9 @@
     <EmbeddedResource Include="Components\VideoPlayer.resx">
       <DependentUpon>VideoPlayer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\WebPageViewer.resx">
+      <DependentUpon>WebPageViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmContainer.resx">
       <DependentUpon>FrmContainer.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -143,4 +152,11 @@
     <None Include="bin\Debug\Resources\九韵少年司法\少年司法新闻网\05 %282%29.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\hxc.ChromiumFX.3.3440.1\build\hxc.ChromiumFX.targets" Condition="Exists('..\..\packages\hxc.ChromiumFX.3.3440.1\build\hxc.ChromiumFX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\hxc.ChromiumFX.3.3440.1\build\hxc.ChromiumFX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\hxc.ChromiumFX.3.3440.1\build\hxc.ChromiumFX.targets'))" />
+  </Target>
 </Project>
