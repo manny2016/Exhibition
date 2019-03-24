@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Exhibition.Components;
@@ -42,10 +44,10 @@ namespace Exhibition
         {
             if (Screen.AllScreens.Length > 1)
             {
-                var screen = Screen.AllScreens[settings.DefaultMonitor - 1];
-                this.Location = new Point(screen.Bounds.X, screen.Bounds.Y);
-                this.Width = screen.Bounds.Width;
-                this.Height = screen.Bounds.Height;
+                //var screen = Screen.AllScreens[settings.DefaultMonitor - 1];
+                //this.Location = new Point(screen.Bounds.X, screen.Bounds.Y);
+                //this.Width = screen.Bounds.Width;
+                //this.Height = screen.Bounds.Height;
             }
         }
         private void Host_Operate(object sender, OperatorEventArgs e)
@@ -63,25 +65,40 @@ namespace Exhibition
         private void InvokeOperate(object sender, OperatorEventArgs e)
         {
 
-            switch (e.Type)
+            try
             {
-                case OperationTypes.Play:
-                    this.ReadytoPlay(e.Resource);
-                    ((IOperate)this.player).Play(e.Resource);
-                    break;
-                case OperationTypes.Stop:
-                    this.DisposePlayer();
-                    break;
+                switch (e.Type)
+                {
+                    case OperationTypes.Play:
+                        if (File.Exists(e.Resource.FullName) == false)
+                            return;
+                        this.ReadytoPlay(e.Resource);
+                        ((IOperate)this.player).Play(e.Resource);
+                        break;
+                    case OperationTypes.Stop:
+                        this.DisposePlayer();
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+
         }
         private UserControl CreatePlayer(Resource resource)
         {
+
             switch (resource.Type)
             {
                 case ResourceType.ImageFolder:
                     return new ImagePlayer(resource);
                 case ResourceType.PowerPoint:
-                    //return new PowerPointPlayer(resource);
+                    return new PowerPointPlayer(resource);
+                case ResourceType.WebPage:
+                    return new AxWebBrowser(resource);
+                case ResourceType.Video:
+                    return new DSMediaPlayer(resource);
                 default:
                     break;
 
@@ -92,10 +109,13 @@ namespace Exhibition
         {
             if (this.player != null)
             {
-                ((IOperate)this.player).Stop();
+                this.DisposePlayer();
+                Thread.Sleep(1000);
             }
             this.SuspendLayout();
             this.player = CreatePlayer(resource);
+            this.player.Width = this.Width;
+            this.Height = this.Height;
             this.Controls.Add(this.player);
             this.ResumeLayout(false);
         }
@@ -110,5 +130,19 @@ namespace Exhibition
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //this.axEDOffice1.OpenPowerPoint(@"d:\d:\Presentation1.pptx", 1, 0, 0);
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            this.axOfficeViewer1.SlideShowOpenAndPlay(@"c:\1.pptx", false, false, false, false);
+        }
     }
 }

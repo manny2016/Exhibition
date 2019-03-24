@@ -46,10 +46,10 @@ namespace Exhibition.Core.Configuration
             {
                 DefaultMonitor = 2,
                 Locates = new Locator[] {
-                    new Locator() { Name="01", DisplayName="法制课件", Root=@"Resources\法制课件" },
-                    new Locator(){ Name="02", DisplayName="青少年权益保护协会", Root = @"Resources\青少年权益保护协会"},
-                    new Locator() { Name="03",DisplayName="法制小视频", Root = @"Resources\法制小视频" },
-                    new Locator() { Name ="04",DisplayName="九韵少年司法", Root = @"Resources\九韵少年司法"}
+                    new Locator() { Name="01", DisplayName="法制课件", Root=@"assets\法制课件" },
+                    new Locator(){ Name="02", DisplayName="青少年权益保护协会", Root = @"assets\青少年权益保护协会"},
+                    new Locator() { Name="03",DisplayName="法制小视频", Root = @"assets\法制小视频" },
+                    new Locator() { Name ="04",DisplayName="九韵少年司法", Root = @"assets\九韵少年司法"}
                 }
             };
             foreach (var locator in settings.Locates)

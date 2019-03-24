@@ -42,16 +42,14 @@
       <HintPath>..\..\packages\hxc.ChromiumFX.3.3440.1\lib\net40-client\ChromiumFX.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="ChromiumWebBrowser, Version=3.3440.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\hxc.ChromiumWebBrowser.3.3440.1\lib\net40-client\ChromiumWebBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib-2005">
+      <HintPath>..\..\libs\DirectShowLib-2005.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MicrosoftOfficeCore.15.0.0\lib\net35\Office.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,11 +64,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\EWebBowser.cs">
+    <Compile Include="Components\DSMediaPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\EWebBowser.Designer.cs">
-      <DependentUpon>EWebBowser.cs</DependentUpon>
+    <Compile Include="Components\DSMediaPlayer.Designer.cs">
+      <DependentUpon>DSMediaPlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\ImagePlayer.cs">
       <SubType>UserControl</SubType>
@@ -78,17 +76,23 @@
     <Compile Include="Components\ImagePlayer.Designer.cs">
       <DependentUpon>ImagePlayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PowerPointPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\PowerPointPlayer.Designer.cs">
+      <DependentUpon>PowerPointPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\AxWebBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\AxWebBrowser.Designer.cs">
+      <DependentUpon>AxWebBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\VideoPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\VideoPlayer.Designer.cs">
       <DependentUpon>VideoPlayer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\WebPageViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\WebPageViewer.Designer.cs">
-      <DependentUpon>WebPageViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmContainer.cs">
       <SubType>Form</SubType>
@@ -100,17 +104,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Components\EWebBowser.resx">
-      <DependentUpon>EWebBowser.cs</DependentUpon>
+    <EmbeddedResource Include="Components\DSMediaPlayer.resx">
+      <DependentUpon>DSMediaPlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\ImagePlayer.resx">
       <DependentUpon>ImagePlayer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\PowerPointPlayer.resx">
+      <DependentUpon>PowerPointPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\AxWebBrowser.resx">
+      <DependentUpon>AxWebBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\VideoPlayer.resx">
       <DependentUpon>VideoPlayer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\WebPageViewer.resx">
-      <DependentUpon>WebPageViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmContainer.resx">
       <DependentUpon>FrmContainer.cs</DependentUpon>
@@ -150,6 +157,51 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Resources\九韵少年司法\少年司法新闻网\05 %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxEDOfficeLib">
+      <Guid>{9EF5199D-83D8-43DE-98A9-DA5BC5F17836}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AxOfficeViewer">
+      <Guid>{F6F03022-1646-4426-A912-1F26464E81AB}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="EDOfficeLib">
+      <Guid>{9EF5199D-83D8-43DE-98A9-DA5BC5F17836}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="OfficeViewer">
+      <Guid>{F6F03022-1646-4426-A912-1F26464E81AB}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\hxc.ChromiumFX.3.3440.1\build\hxc.ChromiumFX.targets" Condition="Exists('..\..\packages\hxc.ChromiumFX.3.3440.1\build\hxc.ChromiumFX.targets')" />

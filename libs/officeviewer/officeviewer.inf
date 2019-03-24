@@ -1,0 +1,16 @@
+; ========================= Edraw Office Viewer Component inf ========================
+; INF file for officeviewer.ocx
+
+[version] 
+; version signature (same for both NT and Win95) do not remove
+signature="$CHICAGO$"
+AdvancedINF=2.0
+
+[Add.Code]
+officeviewer.ocx=officeviewer.ocx
+
+[officeviewer.ocx]
+file-win32-x86=thiscab
+clsid={6BA21C22-53A5-463f-BBE8-5CF7FFA0132B}
+FileVersion=6,0,612,1
+RegisterServer=yes

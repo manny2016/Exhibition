@@ -1,4 +1,6 @@
-﻿namespace Exhibition.Components
+﻿
+
+namespace Exhibition.Components
 {
     partial class VideoPlayer
     {
@@ -6,7 +8,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
@@ -35,7 +36,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "VideoPlayer";
-            this.Size = new System.Drawing.Size(943, 602);
+            this.Size = new System.Drawing.Size(932, 561);
             this.ResumeLayout(false);
 
         }

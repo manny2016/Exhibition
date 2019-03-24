@@ -1,37 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows.Forms;
+
 using Exhibition.Core;
 using Exhibition.Core.Models;
 
 namespace Exhibition.Components
 {
-    public partial class VideoPlayer : UserControl, IOperationService
+    public partial class VideoPlayer : UserControl, IOperate
     {
-        public VideoPlayer()
+        private static VideoPlayer instance;
+        private static object lockObject = new object();
+
+
+        public static VideoPlayer CreateVideoPlayer(Resource resource)
         {
-            InitializeComponent();
+            lock (lockObject)
+            {
+                if (instance == null)
+                {
+                    lock (lockObject)
+                    {
+                        instance = new VideoPlayer(resource);
+                    }
+                }
+            }
+            return instance;
         }
 
-        public Navigation[] GetNavigations()
+        private VideoPlayer(Resource resource)
         {
-            throw new NotImplementedException();
+            InitializeComponent();
+            this.Load += VideoPlayer_Load;
+        }
+
+        private void VideoPlayer_Load(object sender, System.EventArgs e)
+        {
+            this.Width = this.Parent.Width;
+            this.Height = this.Parent.Height;
         }
 
         public void Play(Resource resource)
         {
-            throw new NotImplementedException();
+          
         }
+
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            
         }
+    
     }
 }
