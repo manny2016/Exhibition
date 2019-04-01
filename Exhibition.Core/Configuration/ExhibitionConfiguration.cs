@@ -8,14 +8,16 @@ namespace Exhibition.Core.Configuration
     using System.Linq;
     using System.ServiceModel;
     using Exhibition.Core.Services;
-    using static Exhibition.Core.CrosEnabledService.CorsEnabledServiceHostFactory;
-    using Exhibition.Core.CrosEnabledService;
+
     using System.ServiceModel.Description;
+    using Exhibition.Core.Utilities;
 
     public static class ExhibitionConfiguration
     {
         const string PATH_SETTINGS = @"Configuration";
         const string FILENAME_SETTINGS = "settings.json";
+
+
 
 
 
@@ -26,8 +28,12 @@ namespace Exhibition.Core.Configuration
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
+            }
+            if (!File.Exists(Path.Combine(Environment.CurrentDirectory, PATH_SETTINGS, FILENAME_SETTINGS)))
+            {
                 settings = GetDefaultSettings();
                 Update(settings);
+                return settings;
             }
             else
             {
@@ -46,10 +52,13 @@ namespace Exhibition.Core.Configuration
             {
                 DefaultMonitor = 2,
                 Locates = new Locator[] {
-                    new Locator() { Name="01", DisplayName="法制课件", Root=@"assets\法制课件" },
-                    new Locator(){ Name="02", DisplayName="青少年权益保护协会", Root = @"assets\青少年权益保护协会"},
-                    new Locator() { Name="03",DisplayName="法制小视频", Root = @"assets\法制小视频" },
-                    new Locator() { Name ="04",DisplayName="九韵少年司法", Root = @"assets\九韵少年司法"}
+                    new Locator() { Name="01-01", DisplayName=@"法制课件\预防校园欺凌", Root=@"assets\法制课件\预防校园欺凌" },
+                    new Locator() { Name="01-02", DisplayName=@"法制课件\预防性侵", Root=@"assets\法制课件\预防性侵" },
+                    new Locator() { Name="01-03", DisplayName=@"法制课件\预防毒品犯罪", Root=@"assets\法制课件\预防毒品犯罪" },
+                    new Locator() { Name="01-04", DisplayName=@"法制课件\预防网络犯罪", Root=@"assets\法制课件\预防网络犯罪" },
+                    new Locator() { Name="01-05", DisplayName=@"法制课件\预防网络犯罪", Root=@"assets\法制课件\其他法制宣传" },
+                    new Locator() { Name="02", DisplayName=@"法制小视频", Root=@"assets\法制小视频" },
+                    new Locator() { Name="03", DisplayName=@"氿韵少年司法", Root=@"assets\氿韵少年司法" },
                 }
             };
             foreach (var locator in settings.Locates)
@@ -83,67 +92,69 @@ namespace Exhibition.Core.Configuration
                 yield return LoadResource(locator);
             }
         }
-        private static Navigation LoadResource(Locator locator)
+        public static Navigation LoadResource(Locator locator)
         {
             var navigation = new Navigation()
             {
                 Name = locator.Name,
-                DisplayName = locator.DisplayName,
                 ResLocation = locator.Root,
-                Children = new Navigation[] { }
+                Resources = new Resource[] { }
             };
             var root = Path.Combine(Environment.CurrentDirectory, locator.Root);
-            var directories = Directory.GetDirectories(root);
-            if (directories != null && directories.Count() > 0)
+            var directory = new DirectoryInfo(root);
+            var resources = directory.GetFiles().Select((info) =>
             {
-                navigation.Children = directories.Select(o =>
+                var resource = new Resource();
+                var type = PredicateResourceType(info.Extension);
+                if (type == ResourceType.NotSupport) return null;
+                var names = info.Name.Split('.')[0].Split('-');
+                resource.FullName = info.FullName.Replace(Environment.CurrentDirectory, string.Empty).TrimStart('\\');
+                resource.Name = info.Name;
+                resource.DisplayName = names.Length > 1 ? names[1] : names[0];
+                resource.Type = type;
+                if (type == ResourceType.Video)
                 {
-                    var images = new List<Resource>();
-                    var h5 = new List<Resource>();
-                    var sub = new Navigation() { Name = o.Replace(root, string.Empty).TrimStart('\\'), DisplayName = o.Replace(root, string.Empty).TrimStart('\\') };
-                    sub.ResLocation = o;
-                    var nonImageCollection = Directory.GetFiles(sub.ResLocation).Select(file =>
+                    resource.ImageUrl = CaptureFrame.Capture(resource.FullName, new System.Drawing.Size(640, 317), 10);
+                }
+                return resource;
+            }).Where(resource => resource != null);
+
+            var images = directory.GetDirectories()
+                .Select(ctx =>
+                {
+                    var resource = new Resource();
+                    if (ctx.GetFiles().All((info) =>
                     {
-                        var fileInfo = new FileInfo(file);
-                        return new Resource()
-                        {
-                            FullName = file,
-                            Name = fileInfo.Name,
-                            Type = PredicateResourceType(fileInfo)
-                        };
-                    }).Where(resource => resource.Type != ResourceType.NotSupport).ToArray();//获取视频 PPT，文件集合
-                    if (IsSpecificFolder(new DirectoryInfo(o), Constants.EXTENSION_IMAGE_RESOURCE))
+                        return Constants.EXTENSION_IMAGE_RESOURCE.Any(ex => ex.Equals(info.Extension, StringComparison.OrdinalIgnoreCase));
+                    }))
                     {
-                        var imagedir = new DirectoryInfo(o);
-                        images.Add(new Resource()
-                        {
-                            Name = imagedir.Name.Split('-')[1],
-                            Type = ResourceType.ImageFolder,
-                            FullName = sub.ResLocation,
-                            ImageUrl = imagedir.GetFiles()[0].FullName
-                        });
+                        var names = ctx.Name.Split('-');
+                        resource.FullName = ctx.FullName.Replace(Environment.CurrentDirectory, string.Empty);
+                        resource.Type = ResourceType.ImageFolder;
+                        resource.Name = ctx.Name;
+                        resource.DisplayName = names.Length > 1 ? names[1] : names[0];
+                        return resource;
                     }
+                    return null;
+                })
+                .Where(ctx => ctx != null);
 
-                    var list = new List<Resource>();
-                    list.AddRange(nonImageCollection);
-                    list.AddRange(images);
-                    sub.Resources = list.ToArray();
-                    return sub;
-                }).ToArray();
-            }
+            var merge = new List<Resource>();
+            merge.AddRange(resources);
+            merge.AddRange(images);
+            navigation.Resources = merge.ToArray();
             return navigation;
-
         }
 
-        private static ResourceType PredicateResourceType(FileInfo info)
+        private static ResourceType PredicateResourceType(string extension)
         {
-            if (Constants.EXTENSION_VIDEO_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_VIDEO_RESOURCE.Any(o => o.Equals(extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.Video;
-            if (Constants.EXTENSION_POWERPOINT_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_POWERPOINT_RESOURCE.Any(o => o.Equals(extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.PowerPoint;
-            if (Constants.EXTENSION_WORD_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_WORD_RESOURCE.Any(o => o.Equals(extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.Word;
-            if (Constants.EXTENSION_WEBPAGE_PAGE_RESOURCE.Any(o => o.Equals(info.Extension, StringComparison.OrdinalIgnoreCase)))
+            if (Constants.EXTENSION_WEBPAGE_PAGE_RESOURCE.Any(o => o.Equals(extension, StringComparison.OrdinalIgnoreCase)))
                 return ResourceType.WebPage;
             return ResourceType.NotSupport;
         }
@@ -168,8 +179,7 @@ namespace Exhibition.Core.Configuration
 
         public static void HostOperationSerivceViaConfiguration()
         {
-
-            var host = new CorsEnabledServiceHost(typeof(OperationService));
+            var host = new ServiceHost(typeof(OperationService));
             host.Opened += delegate
             {
                 Console.WriteLine("Operation Service has begun to listen ... ...");
@@ -177,6 +187,13 @@ namespace Exhibition.Core.Configuration
             host.Open();
         }
 
+        public static string GetEndpoint(string method, string key = "endpoint")
+        {
+            var url = System.Configuration.ConfigurationManager.AppSettings[key];
+            if (string.IsNullOrEmpty(url))
+                url = "http://localhost:8888/api/OperationService/{0}";
 
+            return string.Format(url, method);
+        }
     }
 }

@@ -60,14 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\CrosEnabledService\CorsConstants.cs" />
-    <Compile Include="Common\CrosEnabledService\CorsEnabledAttribute.cs" />
-    <Compile Include="Common\CrosEnabledService\CorsEnabledMessageInspector.cs" />
-    <Compile Include="Common\CrosEnabledService\CorsEnabledServiceHost.cs" />
-    <Compile Include="Common\CrosEnabledService\CorsEnabledServiceHostFactory.cs" />
-    <Compile Include="Common\CrosEnabledService\EnableCorsEndpointBehavior.cs" />
-    <Compile Include="Common\CrosEnabledService\PreflightOperationBehavior.cs" />
-    <Compile Include="Common\CrosEnabledService\PreflightOperationInvoker.cs" />
+    <Compile Include="Common\Extensions\HttpExtension.cs" />
     <Compile Include="Common\Extensions\JsonExension.cs" />
     <Compile Include="Common\GlobalHook\BaseHook.cs" />
     <Compile Include="Common\GlobalHook\KeyboardHook.CS" />
@@ -75,11 +68,6 @@
     <Compile Include="Common\GlobalHook\MouseHook.CS" />
     <Compile Include="Common\GlobalHook\MouseSimulator.CS" />
     <Compile Include="Common\GlobalHook\TuioHook.cs" />
-    <Compile Include="Common\Newtonsoft\NewtonsoftJsonBehavior.cs" />
-    <Compile Include="Common\Newtonsoft\NewtonsoftJsonBehaviorExtension.cs" />
-    <Compile Include="Common\Newtonsoft\NewtonsoftJsonContentTypeMapper.cs" />
-    <Compile Include="Common\Newtonsoft\NewtonsoftJsonDispatchFormatter.cs" />
-    <Compile Include="Common\Newtonsoft\RawBodyWriter.cs" />
     <Compile Include="Configuration\Locator.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\ExhibitionConfiguration.cs" />
@@ -92,18 +80,22 @@
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OperationService.cs" />
+    <Compile Include="Services\OperationServiceClient.cs" />
     <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\FFMPEG\CaptureFrame.cs" />
     <Compile Include="Utilities\Host.cs" />
+    <Compile Include="Utilities\TransientFaultHandler\DefaultHttpTransientFaultDetecter.cs" />
+    <Compile Include="Utilities\TransientFaultHandler\DefaultTransientFaultHandler.cs" />
+    <Compile Include="Utilities\TransientFaultHandler\ExceptionTransientFaultDetecter.cs" />
+    <Compile Include="Utilities\TransientFaultHandler\ITransientFaultDetecter.cs" />
+    <Compile Include="Utilities\TransientFaultHandler\ITransientFaultHandler.cs" />
+    <Compile Include="Utilities\VistualKeyboard\VirtualKeyboard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Navigation.json" />
     <None Include="Data\Settings.json" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\Images\" />
-    <Folder Include="Common\PowerPoint\" />
-    <Folder Include="Common\Video\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

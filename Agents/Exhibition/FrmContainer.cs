@@ -38,8 +38,17 @@ namespace Exhibition
                 this.Height = screen.Bounds.Height;
             }
             this.DisposePlayer();
+            this.KeyPreview = true;
+            this.KeyPress += FrmContainer_KeyPress;
 
         }
+
+        private void FrmContainer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( e.KeyChar == (char)Keys.Escape)
+                Application.Exit();
+        }
+
         private void Locating()
         {
             if (Screen.AllScreens.Length > 1)
@@ -135,14 +144,6 @@ namespace Exhibition
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //this.axEDOffice1.OpenPowerPoint(@"d:\d:\Presentation1.pptx", 1, 0, 0);
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            this.axOfficeViewer1.SlideShowOpenAndPlay(@"c:\1.pptx", false, false, false, false);
-        }
+       
     }
 }

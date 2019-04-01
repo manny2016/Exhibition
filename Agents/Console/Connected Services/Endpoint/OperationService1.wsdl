@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://exhibition.core.OperationService" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://exhibition.core.OperationService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://exhibition.core.OperationService/Imports">
+      <xsd:import schemaLocation="http://localhost:8888/api/OperationService?xsd=xsd0" namespace="http://exhibition.core.OperationService" />
+      <xsd:import schemaLocation="http://localhost:8888/api/OperationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8888/api/OperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Exhibition.Core.Models" />
+      <xsd:import schemaLocation="http://localhost:8888/api/OperationService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Exhibition.Core" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Resource">
+    <wsdl:part name="parameters" element="tns:Resource" />
+  </wsdl:message>
+  <wsdl:message name="IOperationService_Play_OutputMessage" />
+  <wsdl:message name="IOperationService_Stop_InputMessage">
+    <wsdl:part name="parameters" element="tns:Stop" />
+  </wsdl:message>
+  <wsdl:message name="IOperationService_Stop_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StopResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperationService_Query_InputMessage">
+    <wsdl:part name="parameters" element="tns:Query" />
+  </wsdl:message>
+  <wsdl:message name="IOperationService_Query_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOperationService_GetNavigations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNavigations" />
+  </wsdl:message>
+  <wsdl:message name="IOperationService_GetNavigations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNavigationsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IOperationService">
+    <wsdl:operation name="Play">
+      <wsdl:input wsaw:Action="http://exhibition.core.OperationService/IOperationService/Play" name="Resource" message="tns:Resource" />
+      <wsdl:output wsaw:Action="http://exhibition.core.OperationService/IOperationService/PlayResponse" message="tns:IOperationService_Play_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Stop">
+      <wsdl:input wsaw:Action="http://exhibition.core.OperationService/IOperationService/Stop" message="tns:IOperationService_Stop_InputMessage" />
+      <wsdl:output wsaw:Action="http://exhibition.core.OperationService/IOperationService/StopResponse" message="tns:IOperationService_Stop_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Query">
+      <wsdl:input wsaw:Action="http://exhibition.core.OperationService/IOperationService/Query" message="tns:IOperationService_Query_InputMessage" />
+      <wsdl:output wsaw:Action="http://exhibition.core.OperationService/IOperationService/QueryResponse" message="tns:IOperationService_Query_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNavigations">
+      <wsdl:input wsaw:Action="http://exhibition.core.OperationService/IOperationService/GetNavigations" message="tns:IOperationService_GetNavigations_InputMessage" />
+      <wsdl:output wsaw:Action="http://exhibition.core.OperationService/IOperationService/GetNavigationsResponse" message="tns:IOperationService_GetNavigations_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="94511058-9557-4ecc-8b91-5869a7c66d70" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8888/api/OperationService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="OperationService.disco" MetadataType="Disco" ID="943ba4f8-a7d3-4b98-9e1e-46a8f0d816ad" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?disco" />
+    <MetadataFile FileName="OperationService.xsd" MetadataType="Schema" ID="9465790c-cbc1-4d3d-a4fb-da32b23ab48d" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?xsd=xsd3" />
+    <MetadataFile FileName="OperationService.wsdl" MetadataType="Wsdl" ID="6a632f0d-d438-4294-a8c5-160efcc679aa" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?wsdl" />
+    <MetadataFile FileName="OperationService1.xsd" MetadataType="Schema" ID="cee35b54-db4a-48bb-8ea2-1ee8c6bc673d" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?xsd=xsd2" />
+    <MetadataFile FileName="OperationService3.xsd" MetadataType="Schema" ID="fa1ee2d0-8a46-4ad8-b6bf-14e049b66f20" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?xsd=xsd1" />
+    <MetadataFile FileName="OperationService2.xsd" MetadataType="Schema" ID="ac5089ed-5bda-42d1-9988-d036f18ecda1" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?xsd=xsd0" />
+    <MetadataFile FileName="OperationService1.wsdl" MetadataType="Wsdl" ID="d6784ed9-800f-44b6-91fe-a910f81c0d3c" SourceId="1" SourceUrl="http://localhost:8888/api/OperationService?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

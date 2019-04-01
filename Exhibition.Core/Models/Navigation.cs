@@ -1,29 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Exhibition.Core.Models
 {
+
+    [DataContract]
     
     public class Navigation
     {
-        [Newtonsoft.Json.JsonProperty("name")]
+        
+        [DataMember(Name ="name")]
         public string Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("displayName")]
+
+        [DataMember(Name = "displayName")]
         public string DisplayName { get; set; }
 
 
-        [Newtonsoft.Json.JsonProperty("resLocation", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [DataMember(Name = "resLocation")]
         public string ResLocation { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("children")]
+        [DataMember(Name = "children")]
 
         public Navigation[] Children { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("resources", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [DataMember(Name = "resources")]
 
         public Resource[] Resources { get; set; }
     }

@@ -1,3 +1,21 @@
-{
-
+﻿{
+  "locates": [
+    {
+      "name": "01",
+      "displayName": "法制课件",
+      "root": "assets\\法制课件"
+    },
+    {
+      "name": "03",
+      "displayName": "法制小视频",
+      "root": "assets\\法制小视频"
+    },
+    {
+      "name": "04",
+      "displayName": "九韵少年司法",
+      "root": "assets\\九韵少年司法"
+    }
+  ],
+  "defaultMonitor": 2,
+  "office": null
 }

@@ -1,24 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+
 
 namespace Exhibition.Core.Models
 {
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
 
+    [MessageContract]    
     public class Resource
     {
-        [Newtonsoft.Json.JsonProperty("name")]
+
+        [DataMember]
         public string Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("type")]
+
+        [DataMember]
+        public string DisplayName { get; set; }
+
+
+        [DataMember]
         public ResourceType Type { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("fullName")]
+
+        [DataMember]
         public string FullName { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("imageUrl", NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [DataMember]
+
         public string ImageUrl { get; set; }
     }
 }

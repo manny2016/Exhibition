@@ -5,8 +5,153 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Console"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="1080" Width="1929" WindowState="Maximized" WindowStyle="None" AllowsTransparency="True">
+    <Viewbox Stretch="Fill">
+        <Grid Height="1080" Width="1929">
+            <Image x:Name="g1Bg" Source="Images\g1b.png" Margin="0"/>
+            <Grid x:Name="g1" Margin="0" d:IsHidden="True">
+                <Image x:Name="g1bg" Source="Images\g2b.png"/>
+                <Grid x:Name="g1_1" Margin="630,292,62,32">
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Width="1200" VerticalAlignment="Top" Foreground="White">
+                        <UniformGrid x:Name="g1Panel" MaxWidth="1200" />
+                    </ScrollViewer>
+                </Grid>
+                <Grid x:Name="g1Left" HorizontalAlignment="Left" Margin="270,245,0,160" Width="270">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF616F85"/>
+                            <GradientStop Color="#FF1F242C" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <StackPanel>
+                        <Button x:Name="yfxyql" Height="135"  VerticalAlignment="Top" Tag="01-01" Click="LegalCourseware_Click">
+                            <TextBlock Text="预防校园欺凌" Width="193.333"/>
+                        </Button>
+                        <Button x:Name="yfxq" Height="135" VerticalAlignment="Top" Tag="01-02" Click="LegalCourseware_Click">
+                            <TextBlock Text="预防性侵" Width="193.333"/>
+                        </Button>
+                        <Button x:Name="yfdpfz" Height="135" VerticalAlignment="Top" Tag="01-03" Click="LegalCourseware_Click">
+                            <TextBlock Text="预防毒品犯罪" Width="193.333"/>
+                        </Button>
+                        <Button x:Name="yfwlfz" Height="135" VerticalAlignment="Top" Tag="01-04" Click="LegalCourseware_Click">
+                            <TextBlock Text="预防网络犯罪" Width="193.333"/>
+                        </Button>
+                        <Button x:Name="qtfzxc" Height="135"  VerticalAlignment="Top" Tag="01-05" Click="LegalCourseware_Click">
+                            <TextBlock Text="其他法制宣传" Width="193.333"/>
+                        </Button>
+                    </StackPanel>
+                
+                </Grid>
+            </Grid>
+            <Grid x:Name="g2" Margin="0" d:IsHidden="True" >
+                <Image Source="Images\g3b.png" d:IsHidden="True"/>
+                <Grid Margin="362,286,53,33" >
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Width="1400" VerticalAlignment="Top" Foreground="White">
+                        <UniformGrid x:Name="g2Panel" MaxWidth="1400" />
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+            <Grid x:Name="g3" Margin="362,286,53,33" d:IsHidden="True" >
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Width="1400" VerticalAlignment="Top" Foreground="White">
+                    <UniformGrid x:Name="g3Panel" MaxWidth="1400" >
+                    </UniformGrid>
+                </ScrollViewer>
+            </Grid>
+            <Grid x:Name="g4" Margin="0" >
+                <Image Source="Images\g2b.png"/>
+                <Image x:Name="imgG4" Source="Images\g4b.png"/>
+                <Grid>
+                    <Grid x:Name="g4_1" Margin="627,328,66,78.888">
+                        <TextBlock x:Name="提示我要咨询" Foreground="#FFF8F9FC" FontFamily="Microsoft YaHei" IsHyphenationEnabled="True" TextAlignment="Left" TextWrapping="Wrap" Margin="0" VerticalAlignment="Bottom" ><Run FontSize="30" Text="      "/><Run FontSize="28" Text="欢迎使用在线服务，我们的服务范围包括法律咨询和心理咨询。您可以在这里留下姓名联系方式和需要咨询的问题，字数不超过300字，我们会在第一时间回复。"/></TextBlock>
+                        <Grid Margin="0,0,0,106.112"  RenderTransformOrigin="0,0">
+                            <Border BorderBrush="#FFA0A0A0" Background="#FF3A4350" BorderThickness="9" CornerRadius="50" >
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Margin="50,30,50,100" Width="1103" VerticalAlignment="Top" Foreground="White">
+                                    <TextBox x:Name="txtWyzx"  GotFocus="TextBoxGotFocus" LostFocus="TextBoxLostFocus"  Width="1103" Height="400" HorizontalAlignment="Left" BorderThickness="0" Text="" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontSize="32" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,10,0" Foreground="White" SelectionBrush="{x:Null}" />
+                                </ScrollViewer>
+                            </Border>
+                            <Button x:Name="btnWyzx" Height="45" Width="152" HorizontalAlignment="Right" Margin="0,0,145,32" VerticalAlignment="Bottom" Click="btnWyzx_Click">
+                                <Image x:Name="提交" Source="Images\提交.png" />
+                            </Button>
+
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="g4_2" Margin="627,328,66,78.888" d:IsHidden="True">
+                        <TextBlock x:Name="提示我要援助" Foreground="#FFF8F9FC" FontFamily="Microsoft YaHei" IsHyphenationEnabled="True" TextAlignment="Left" TextWrapping="Wrap" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="1235.192" ><Run FontSize="30" Text="      "/><Run FontSize="28" Text="您好！我们为您提供法律援助服务，您可以留下姓名，联系方式，需要帮助的问题字数不超过300字，我们会在第一时间回复。"/></TextBlock>
+                        <Grid Margin="0,0,0,106.112"  RenderTransformOrigin="0,0">
+                            <Border BorderBrush="#FFA0A0A0" Background="#FF3A4350" BorderThickness="9" CornerRadius="50" >
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Margin="50,30,50,100" Width="1103" VerticalAlignment="Top" Foreground="White">
+                                    <TextBox x:Name="txtWyyz" GotFocus="TextBoxGotFocus" LostFocus="TextBoxLostFocus" Width="1103" Height="400"  HorizontalAlignment="Left" BorderThickness="0" Text="" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontSize="32" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,10,0" Foreground="White" SelectionBrush="{x:Null}"/>
+                                </ScrollViewer>
+                            </Border>
+                            <Button x:Name="btnWyyz" Height="45" Width="152" HorizontalAlignment="Right" Margin="0,0,145,32" VerticalAlignment="Bottom" Click="btnWyyz_Click">
+                                <Image x:Name="提交1" Source="Images/提交.png" />
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="g4_3" Margin="627,328,66,78.888" d:IsHidden="True">
+                        <TextBlock  x:Name="提示举报" Foreground="#FFF8F9FC" FontFamily="Microsoft YaHei" IsHyphenationEnabled="True" TextAlignment="Left" TextWrapping="Wrap" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="1235.192" ><Run FontSize="30" Text="      "/><Run FontSize="28" Text="这里是宜兴市人民检察院未成年人保护监督平台，当您遇到未成年人合法权益受害或者发现上述情况时，欢迎您到平台反应。请将您的姓名，联系方式，和您要反应的问题在这里留言，或者发送到邮箱YX-QSNOYBHXH@162.COM字数不超过300字，我们会在第一时间回复。"/></TextBlock>
+                        <Grid Margin="0,0,0,106.112"  RenderTransformOrigin="0,0">
+                            <Border BorderBrush="#FFA0A0A0" Background="#FF3A4350" BorderThickness="9" CornerRadius="50" >
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Margin="50,30,50,100" Width="1103" VerticalAlignment="Top" Foreground="White">
+                                    <TextBox x:Name="txtWyjb" GotFocus="TextBoxGotFocus" LostFocus="TextBoxLostFocus" Width="1103" Height="400"  HorizontalAlignment="Left" BorderThickness="0" Text="" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" FontSize="32" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,10,0" Foreground="White" SelectionBrush="{x:Null}">
+                                    </TextBox>
+                                </ScrollViewer>
+                            </Border>
+                            <Button x:Name="btnWyjb" Height="45" Width="152" HorizontalAlignment="Right" Margin="0,0,145,32" VerticalAlignment="Bottom" Click="btnWyjb_Click">
+                                <Image x:Name="提交2" Source="Images/提交.png" />
+                            </Button>
+
+                        </Grid>
+                    </Grid>
+                    
+                </Grid>
+                <Grid x:Name="g4Left" HorizontalAlignment="Left" Margin="270,245,0,294" Width="270">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF616F85"/>
+                            <GradientStop Color="#FF1F242C" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Button x:Name="wyzx" Height="135" Margin="0,0,0,0" VerticalAlignment="Top" Click="wyzx_Click">
+                        <TextBlock Text="我要咨询" Width="193.333"/>
+                    </Button>
+                    <Button x:Name="wyyz" Height="135" Margin="0,135,0,0" VerticalAlignment="Top" Click="wyyz_Click">
+                        <TextBlock Text="我要援助" Width="193.333"/>
+                    </Button>
+                    <Button x:Name="wyjb" Height="135" Margin="0,270,0,0" VerticalAlignment="Top" Click="wyjb_Click">
+                        <TextBlock Text="我要举报" Width="193.333"/>
+                    </Button>
+                    <Button x:Name="yasf" Height="135" Margin="0,405,0,0" VerticalAlignment="Top" Click="yasf_Click">
+                        <TextBlock Text="以案说法" Width="193.333"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid x:Name="gleft" HorizontalAlignment="Left" Margin="0,245.668,0,-2.668" Width="270">
+                <Grid.OpacityMask>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF616F85"/>
+                        <GradientStop Color="#FF1F242C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.OpacityMask>
+                <!--<Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF616F85"/>
+                        <GradientStop Color="#FF1F242C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>-->
+                <Button x:Name="sfcj"  Height="135"  VerticalAlignment="Top" Click="sfkj_Click">
+                    <TextBlock Text="法制课件" Width="163.333"/>
+                </Button>
+                <Button x:Name="fzxsp" Height="135" Margin="0,135,0,0" Tag="02" VerticalAlignment="Top" Click="fzxsp_Click">
+                    <TextBlock Text="法制小视频" Width="163.333"/>
+                </Button>
+                <Button x:Name="jysn" Height="135" Margin="0,270,0,0" VerticalAlignment="Top" Click="jysn_Click">
+                    <TextBlock Text="氿韵少年司法" Width="185.333"/>
+                </Button>
+                <Button x:Name="qsnqy"  Height="135" Margin="0,405,0,0" VerticalAlignment="top" Click="qsnqy_Click">
+                    <TextBlock Text="青少年权益保护协会" Width="163.333"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Viewbox>
 </Window>

@@ -10,6 +10,7 @@ namespace Exhibition.Core
     public interface IOperate : IDisposable
     {
         void Play(Resource resource);
+
         void Stop();
     }
 }
