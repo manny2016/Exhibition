@@ -9,7 +9,7 @@ namespace Exhibition.Core.Models
 {
 
     [DataContract]
-    
+
     public class Navigation
     {
         

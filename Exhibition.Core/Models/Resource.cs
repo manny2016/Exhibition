@@ -7,26 +7,27 @@ namespace Exhibition.Core.Models
     using System.Runtime.Serialization;
     using System.ServiceModel;
 
-    [MessageContract]    
+    [DataContract]
     public class Resource
     {
+        
 
-        [DataMember]
+        [DataMember(Name="name")]
         public string Name { get; set; }
 
 
-        [DataMember]
+        [DataMember(Name = "displayName")]
         public string DisplayName { get; set; }
 
 
-        [DataMember]
+        [DataMember(Name = "type")]
         public ResourceType Type { get; set; }
 
 
-        [DataMember]
+        [DataMember(Name = "fullName")]
         public string FullName { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "imageUrl")]
 
         public string ImageUrl { get; set; }
     }

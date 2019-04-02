@@ -80,7 +80,6 @@
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OperationService.cs" />
-    <Compile Include="Services\OperationServiceClient.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\FFMPEG\CaptureFrame.cs" />
     <Compile Include="Utilities\Host.cs" />

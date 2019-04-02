@@ -8,45 +8,32 @@ namespace Exhibition.Core
     using Exhibition.Core.Models;
     using System.ServiceModel;
     using System.ServiceModel.Web;
-    [ServiceContract(Namespace = "http://exhibition.core.OperationService")]
+    [ServiceContract]
 
-    public interface IOperationService : IOperate
+    public interface IOperationService
     {
-        [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        void Play(string name,string displayName,ResourceType type,string fullName);
-
-
-        //[DataMember]
-        //public string Name { get; set; }
-
-
-        //[DataMember]
-        //public string DisplayName { get; set; }
-
-
-        //[DataMember]
-        //public ResourceType Type { get; set; }
-
-
-        //[DataMember]
-        //public string FullName { get; set; }
-
-        //[DataMember]
-
-        //public string ImageUrl { get; set; }
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST",
+            BodyStyle = WebMessageBodyStyle.Bare,            
+            ResponseFormat = WebMessageFormat.Json)]
+        void Play(Resource resource);
+
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+            ResponseFormat = WebMessageFormat.Json)]
         new void Stop();
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET",
+            ResponseFormat = WebMessageFormat.Json)]
         Resource[] Query(string name);
 
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET",
+            ResponseFormat = WebMessageFormat.Json)]
         Navigation[] GetNavigations();
     }
 }

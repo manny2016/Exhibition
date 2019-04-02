@@ -10,7 +10,7 @@ using Exhibition.Core.Models;
 
 namespace Exhibition.Core.Services
 {
-
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class OperationService : IOperationService
     {
         public void Dispose()
@@ -25,16 +25,9 @@ namespace Exhibition.Core.Services
         }
 
 
-
-        public void Play(string name, string displayName, ResourceType type, string fullName)
-        {
-            var resource = new Resource() { Name = name, DisplayName = displayName, Type = type, FullName = fullName };
-            Host.TriggerOperationEvent(this, OperationTypes.Play, resource);
-        }
-
         public void Play(Resource resource)
         {
-            throw new NotImplementedException();
+            Host.TriggerOperationEvent(this, OperationTypes.Play, resource);
         }
 
         public Resource[] Query(string name)
